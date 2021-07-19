@@ -8,20 +8,21 @@ install_trdsql() {
     local install_version=$2
     local install_path=$3
 
-    case $(uname -s) in
-    Darwin) os="darwin" ;;
-    *) os="linux" ;;
+    case "$(uname -s)" in
+      Darwin) platform="darwin" ;;
+      Linux) platform="linux" ;;
+      *) fail "Unsupported platform" ;;
     esac
 
-    case $(uname -m) in
-    x86_64) arch="amd64" ;;
-    *) arch="other" ;;
+    case "$(uname -m)" in
+      i?86) architecture="386" ;;
+      x86_64) architecture="amd64" ;;
+      arm64|aarch64|armv8l) architecture="arm64" ;;
+      armv7l) architecture="arm7" ;;
+      mips) architecture="mips" ;;
+      mipsel) architecture="mipsle" ;;
+      *) fail "Unsupported architecture" ;;
     esac
-
-    if [ "$arch" = "other" ]; then
-        echo "Unsupported architecture $(uname -m). Only x64 binaries are available."
-        exit
-    fi
 
     if [[ $( echo "$install_version" | cut -d"." -f 1) -lt 1 && $( echo "$install_version" | cut -d"." -f 2) -lt 7 ]]; then
       download="https://github.com/noborus/trdsql/releases/download/v${install_version}/trdsql_${os}_amd64.zip"

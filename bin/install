@@ -25,9 +25,9 @@ install_trdsql() {
     esac
 
     if [[ $( echo "$install_version" | cut -d"." -f 1) -lt 1 && $( echo "$install_version" | cut -d"." -f 2) -lt 7 ]]; then
-      download="https://github.com/noborus/trdsql/releases/download/v${install_version}/trdsql_${os}_amd64.zip"
+      download="https://github.com/noborus/trdsql/releases/download/v${install_version}/trdsql_${platform}_${architecture}.zip"
     else
-      download="https://github.com/noborus/trdsql/releases/download/v${install_version}/trdsql_v${install_version}_${os}_amd64.zip"
+      download="https://github.com/noborus/trdsql/releases/download/v${install_version}/trdsql_v${install_version}_${platform}_${architecture}.zip"
     fi
     filename="${install_path}/tmp/trdsql.zip"
 

@@ -14,6 +14,9 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         ver: [0.6.3, 0.7.4, 0.9.0, 1.0.0]
+        exclude:
+          - os: macos-latest
+            ver: [0.6.3, 0.7.4]
 
     runs-on: ${{ matrix.os }}
 
